@@ -6,3 +6,5 @@ node_modules
 .env.production.local
 
 npm-debug.log*
+.DS_Store
+backend/.DS_Store
