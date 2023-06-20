@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const MEMORY_FILE_PATH = './memory.txt';
+const MEMORY_FILE_PATH = './src/utils/memory.txt';
 
 export const writeToFile = (data: string) => {
   fs.writeFileSync(MEMORY_FILE_PATH, data);

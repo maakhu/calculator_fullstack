@@ -13,6 +13,7 @@ export async function getMemory(req: Request, res: Response) {
 
 export async function postMemory(req: Request, res: Response) {
     const { memory } = req.body;
+    console.log("bodyyyyy "+ req.body)
     if (typeof memory !== 'string') {
         throw new ParameterError('memory must be a string');
     }
@@ -27,6 +28,15 @@ export async function deleteMemory(req: Request, res: Response) {
 
 export async function getAddition(req: Request, res: Response) {
     const { a, b } = req.query;
+    if (typeof a !== 'string' || typeof b !== 'string') {
+        throw new ParameterError('a and b must be strings');
+    }
+    const result = Number(a) + Number(b);
+    res.send(result.toString());
+}
+
+export async function postAddition(req: Request, res: Response) {
+    const { a, b } = req.body;
     if (typeof a !== 'string' || typeof b !== 'string') {
         throw new ParameterError('a and b must be strings');
     }
