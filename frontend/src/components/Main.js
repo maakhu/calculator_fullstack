@@ -9,7 +9,7 @@ function Main() {
           Welcome to the Calculator!
         </h2>
          <div className="button">
-          <p>calculator</p>
+         <Link to="/calculator">Calculator</Link>
          </div>
       </header>
     </div>
