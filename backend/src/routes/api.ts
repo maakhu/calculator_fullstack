@@ -9,6 +9,7 @@ apiRouter.use(express.json());
 
 apiRouter.get('/memory', calculatorController.getMemory);
 apiRouter.post('/memory', calculatorController.postMemory);
+apiRouter.put('/memory', calculatorController.putMemory);
 apiRouter.delete('/memory', calculatorController.deleteMemory);
 
 apiRouter.use('*', (req, res, next) => {

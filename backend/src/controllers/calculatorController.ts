@@ -13,12 +13,20 @@ export async function getMemory(req: Request, res: Response) {
 
 export async function postMemory(req: Request, res: Response) {
     const { memory } = req.body;
-    console.log("bodyyyyy "+ req.body)
     if (typeof memory !== 'string') {
         throw new ParameterError('memory must be a string');
     }
     writeToFile(memory);
     res.sendStatus(status.NO_CONTENT);
+}
+
+export async function putMemory(req: Request, res: Response) {
+  const { memory } = req.body;
+  if (typeof memory !== 'string') {
+      throw new ParameterError('memory must be a string');
+  }
+  writeToFile(memory);
+  res.sendStatus(status.NO_CONTENT);
 }
 
 export async function deleteMemory(req: Request, res: Response) {
