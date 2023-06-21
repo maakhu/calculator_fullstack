@@ -4,7 +4,7 @@ import "./Calculator.css";
 
 export default function Calculator() {
   return (
-    <div className="calculatorPage">
+    <div className="container">
       <h1>
         <span>Calculator</span>
       </h1>
@@ -41,7 +41,7 @@ export default function Calculator() {
         <div className="buttonRow">
           <button>,</button>
           <button>0</button>
-          <button>DEL</button>
+          <button>{"<"}</button>
           <button>=</button>
         </div>
       </div>
