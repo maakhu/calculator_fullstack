@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main  from "./components/Main";
-import NotFound from "./components/pages/NotFound";
-import Calculator from "./components/pages/Calculator";
+import NotFound from "./components/NotFound/NotFound";
+import Calculator from "./components/Calculator/Calculator";
 
 
 function App() {

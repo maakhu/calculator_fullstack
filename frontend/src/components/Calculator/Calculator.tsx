@@ -1,8 +1,15 @@
-import React from "react";
+import React, { FunctionComponent, useState } from "react";
+import Display from "../Display/Display";
+import { Operator } from '../../lib/types'
 import "./Calculator.css";
-//write a frontend calculator using React
 
-export default function Calculator() {
+export const Calculator: FunctionComponent = () => {
+  const [memory, setMemory] = useState<number>(0)
+  const [result, setResult] = useState<number>(0)
+  const [waitingForOperand, setWaitingForOperand] = useState<boolean>(true)
+  const [pendingOperator, setPendingOperator] = useState<Operator>()
+  const [display, setDisplay] = useState<string>('0')
+
   return (
     <div className="container">
       <h1>
@@ -10,10 +17,8 @@ export default function Calculator() {
       </h1>
       <h4>by Máté Egri</h4>
       <div className="calculator">
-        <div className="display">
-          <div className="curr-operation">0</div>
-          <div className="enteredNo">0</div>
-        </div>
+        <Display hasMemory= {memory !== 0} expression={typeof pendingOperator !== 'undefined' ? `${result}${pendingOperator}${waitingForOperand ? '' : display}` : ''} value={display}/>
+  
         <div className="buttonRow">
           <button>C</button>
           <button>M+</button>
@@ -47,4 +52,6 @@ export default function Calculator() {
       </div>
     </div>
   );
-}
+};
+
+export default Calculator;

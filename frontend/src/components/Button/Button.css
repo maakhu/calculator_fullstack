@@ -1,0 +1,31 @@
+button {
+  width: 25%;
+  background: #4a4949;
+  color: #dddddd;
+  border: solid 1px #515151;
+  border-radius: 0px;
+  padding: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-block;
+  border-right: solid 2px #4e4f50;
+  border-bottom: solid 2px #3a3b3d;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #6c6b68;
+  transform: scale(1.03);
+}
+
+button:active {
+  background: #4a4949;
+  transform: scale(1);
+}
+
+.buttonRow {
+  width: 100%;
+  background-color: #4a4949;
+  }
