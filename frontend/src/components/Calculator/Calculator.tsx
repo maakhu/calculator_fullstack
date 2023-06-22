@@ -1,6 +1,8 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Display from "../Display/Display";
 import { Digit, Operator } from '../../lib/types'
+import getMemory from "../../api/getMemory";
+import postMemory from "../../api/postMemory";
 import "./Calculator.css";
 
 export const Calculator: FunctionComponent = () => {
@@ -9,6 +11,27 @@ export const Calculator: FunctionComponent = () => {
   const [waitingForOperand, setWaitingForOperand] = useState<boolean>(true)
   const [pendingOperator, setPendingOperator] = useState<Operator>()
   const [display, setDisplay] = useState<string>('0')
+
+  useEffect(() => {
+    fetchGetMemory();
+  }, []);
+
+  const fetchGetMemory = async () => {
+    try {
+      const memoryValue = await getMemory();
+      setMemory(memoryValue);
+    } catch (error) {
+      console.error('Error fetching memory:', error);
+    }
+  };
+
+  const fetchPostMemory = async (memory: number) => {
+    try {
+      await postMemory(memory);
+    } catch (error) {
+      console.error('Error posting memory:', error);
+    }
+  };
 
   const calculate = (rightOperand: number, pendingOperator: Operator): boolean => {
     let newResult = result
@@ -159,8 +182,8 @@ export const Calculator: FunctionComponent = () => {
   
         <div className="buttonRow">
           <button>C</button>
-          <button>M+</button>
-          <button>M</button>
+          <button onClick={fetchPostMemory}>M+</button>
+          <button onClick={fetchGetMemory}>M</button>
           <button>+</button>
         </div>
         <div className="buttonRow">

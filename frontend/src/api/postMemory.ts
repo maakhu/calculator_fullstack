@@ -1,20 +1,21 @@
-export async function postItemFetch(postItem) {
+export async function saveMemory(postItem: any) {
   try {
-    const response = await fetch("/api/cikktetelek/", {
+    const response = await fetch("/api/memory/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postItem),
     });
-    const dbResponse = await response.json();
+    const backend = await response.json();
     if (!response.ok) {
-      throw new Error(dbResponse.message);
+      throw new Error(backend.message);
     }
-    return dbResponse;
+    return backend;
   } catch (error) {
     if (error instanceof Error) throw new Error(error.message);
   }
 }
 
-export default postItemFetch;
+export default saveMemory;
+
