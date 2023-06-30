@@ -16,7 +16,7 @@ export enum OperatorType {
 
 export type CalcInput =
   | { type: InputType.Digit; value: number }
-  | { type: InputType.Operator; OperatorType: OperatorType };
+  | { type: InputType.Operator; operator: OperatorType };
 
 export type CalcState = {
   displayValue: number;
@@ -29,5 +29,5 @@ export type Operation = {
 
 export type OperationsBuilder = {
   operations: Operation[];
-  working: Omit<Operation, "operator"> | null;
+  working: Operation;
 };
