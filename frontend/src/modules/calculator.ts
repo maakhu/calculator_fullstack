@@ -9,7 +9,7 @@ import {
   OperationsBuilder,
 } from "../lib/types";
 
-const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
+const getOperationsBuilder = (inputs: Array<CalcInput>): Array<Operation> => {
   const builder = inputs.reduce<OperationsBuilder>(
     (builder, input) => {
       switch (input.type) {
@@ -48,11 +48,26 @@ const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
   return builder.operations;
 };
 
-const getState = (input: Array<CalcInput>): CalcState => {
-  return { displayValue: 0 };
+const getTotal = (operations: Array<Operation>): number =>
+  operations.reduce<number>((sum, operation) => sum + operation.value, 0);
+
+const getState = (inputs: Array<CalcInput>): CalcState => {
+  const builder = getOperationsBuilder(inputs);
+  const { operations } = builder;
+  const lastOperation = operations.length
+    ? operations[operations.length - 1]
+    : null;
+  if (!lastOperation) return { displayValue: 0 };
+  switch (lastOperation.operator) {
+    case OperatorType.Equals:
+      return { displayValue: getTotal(operations) };
+    default:
+      return { displayValue: builder.working.value };
+  }
 };
 
 const Calculator = {
+  getOperationsBuilder,
   getState,
 };
 

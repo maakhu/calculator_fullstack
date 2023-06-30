@@ -1,38 +1,48 @@
+import Calculator from "./calculator";
+import {
+  Digit,
+  Operator,
+  InputType,
+  OperatorType,
+  CalcInput,
+  CalcState,
+  Operation,
+  OperationsBuilder,
+} from "../lib/types";
 
+test("derives displayValue upon new num input", () => {
+  const inputs: Array<CalcInput> = [
+    { type: InputType.Digit, value: 2 },
+    { type: InputType.Digit, value: 3 },
+    { type: InputType.Operator, operator: OperatorType.Add },
+    { type: InputType.Digit, value: 5 },
+  ];
+  const state = Calculator.getState(inputs);
+  expect(state.displayValue).toEqual(28);
+});
 
+test("derives final state, addition", () => {
+  const inputs: Array<CalcInput> = [
+    { type: InputType.Digit, value: 2 },
+    { type: InputType.Digit, value: 3 },
+    { type: InputType.Operator, operator: OperatorType.Add },
+    { type: InputType.Digit, value: 5 },
+    { type: InputType.Operator, operator: OperatorType.Equals },
+  ];
+  const state = Calculator.getState(inputs);
+  expect(state.displayValue).toEqual(28);
+});
 
-
-
-
-
-
-
-
-
-const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
-  const builder: OperationsBuilder = inputs. reduce<OperationsBuilder> (
-  (builder, input) =>
-    switch (input.type) {
-      case InputType.Numerical:
-        const prevalue = builder.working?.value || 0;
-        const newValue = prevalue * 10 + input. value;
-        return {
-  ...builder,
-  working: { ...builder.working, value: newValue }, };
-  
-  case InputType. Operator:
-  if (input.operator === OperatorType.Equals) {
-  return {
-  operations: I
-  ...builder.operations, builder.working,
-  { operator: OperatorType. Equals, value: 0 },
-  ],
-  working: R operator: OperatorType.Add, value: 0 h, };
-  
-} else {
-  return {
-  operations: I...builder.operations, builder.working], working: f operator: input.operator, value: 0 7, }:
-  operations: [1,
-  working: { operator: OperatorType.Add, value: 0 ),
-  }
-  );
+test("derives final state, add, subtact", () => {
+  const input: Array<CalcInput> = [
+    { type: InputType.Digit, value: 2 },
+    { type: InputType.Digit, value: 2 },
+    { type: InputType.Operator, operator: OperatorType.Add },
+    { type: InputType.Digit, value: 3 },
+    { type: InputType.Operator, operator: OperatorType.Subtract },
+    { type: InputType.Digit, value: 5 },
+    { type: InputType.Operator, operator: OperatorType.Equals },
+  ];
+  const state = Calculator.getState(input);
+  expect(state.displayValue).toEqual(20);
+});
