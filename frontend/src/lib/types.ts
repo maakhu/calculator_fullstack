@@ -29,5 +29,5 @@ export type Operation = {
 
 export type OperationsBuilder = {
   operations: Operation[];
-  working: Omit<Operation, "operator">;
+  working: Omit<Operation, "operator"> | null;
 };

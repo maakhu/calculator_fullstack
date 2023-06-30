@@ -6,19 +6,37 @@ import {
   CalcInput,
   CalcState,
   Operation,
+  OperationsBuilder,
 } from "../lib/types";
 
 const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
-  inputs.reduce<Array<Operation>>((operations, input) => {
-    const lastOperation: Operation = operations.length ? operations[operations.length - 1] : {operator: OperatorType.Add, value: 0, operator: OperatorType.Add};
-    switch (input.type) {
-      case: InputType.Digit: 
+  const builder = inputs.reduce<OperationsBuilder>(
+    (builder, input) => {
+      switch (input.type) {
+        case InputType.Digit:
+          const prevValue = builder.working?.value || 0;
+          const newValue = prevValue * 10 + input.value;
+          return { ...builder, working: { value: newValue } };
 
-      case: InputType.Operator:
-    }
-    return [{ operator : OperatorType.Add, value: 0 }]
-  }, [] as Array<Operation>);
-  return [];
+        case InputType.Operator:
+          if (input.operator === OperatorType.Equals) {
+            return {
+              operations: [...builder.operations, builder.working],
+              working: { operator: input.operator, value: 0 },
+            };
+          } else {
+            return {
+              operations: [...builder.operations, builder.working],
+              working: { operator: input.operator, value: 0 },
+            };
+          }
+      }
+    },
+    {
+      operations: [],
+      working: { operator: OperatorType.Add, value: 0 },
+    } as OperationsBuilder
+  );
 };
 const getState = (input: Array<CalcInput>): CalcState => {
   return { displayValue: 0 };
