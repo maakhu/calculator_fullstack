@@ -9,7 +9,7 @@ import {
   OperationsBuilder,
 } from "../lib/types";
 
-const getOperationsBuilder = (inputs: Array<CalcInput>): Array<Operation> => {
+const getOperationsBuilder = (inputs: Array<CalcInput>): OperationsBuilder => {
   const builder = inputs.reduce<OperationsBuilder>(
     (builder, input) => {
       switch (input.type) {
@@ -42,10 +42,9 @@ const getOperationsBuilder = (inputs: Array<CalcInput>): Array<Operation> => {
     {
       operations: [],
       working: { operator: OperatorType.Add, value: 0 },
-    } as OperationsBuilder
+    }
   );
-
-  return builder.operations;
+  return builder;
 };
 
 const getTotal = (operations: Array<Operation>): number =>
