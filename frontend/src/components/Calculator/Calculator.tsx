@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import Display from "../Display/Display";
-import { Digit, Operator } from "../../lib/types";
+import {  Operator } from "../../lib/types";
 import getMemory from "../../api/getMemory";
 import postMemory from "../../api/postMemory";
 import "./Calculator.css";
@@ -77,24 +77,24 @@ export const Calculator: FunctionComponent = () => {
     setDisplay((currentValue: string) => {
       return currentValue + digit.toString();
     })
-    //   let newDisplay = display;
+      let newDisplay = display;
 
-    //   if ((display === "0" && digit === 0) || display.length > 12) {
-    //     return;
-    //   }
+      if ((display === "0" && digit === 0) || display.length > 12) {
+        return;
+      }
 
-    //   if (waitingForOperand) {
-    //     newDisplay = "";
-    //     setWaitingForOperand(false);
-    //   }
+      if (waitingForOperand) {
+        newDisplay = "";
+        setWaitingForOperand(false);
+      }
 
-    //   if (display !== "0") {
-    //     newDisplay = newDisplay + digit.toString();
-    //   } else {
-    //     newDisplay = digit.toString();
-    //   }
+      if (display !== "0") {
+        newDisplay = newDisplay + digit.toString();
+      } else {
+        newDisplay = digit.toString();
+      }
 
-    //   setDisplay(newDisplay);
+      setDisplay(newDisplay);
   };
 
   const onPointButtonClick = () => {
@@ -115,16 +115,7 @@ export const Calculator: FunctionComponent = () => {
   const onOperatorButtonClick = (operator: string) => {
       const currentNumber = Number(display);
       setResult (currentNumber)
-    //   if (typeof pendingOperator !== "undefined" && !waitingForOperand) {
-    //     if (!calculate(operand, pendingOperator)) {
-    //       return;
-    //     }
-    //   } else {
-    //     setResult(operand);
-    //   }
-
-    //   setPendingOperator(operator);
-    //   setWaitingForOperand(true);
+      
   };
 
   const onChangeSignButtonClick = () => {

@@ -12,14 +12,14 @@ import {
 
 test("generates operations", () => {
   const inputs: Array<CalcInput> = [
+    { type: InputType.Digit, value: 1 },
     { type: InputType.Digit, value: 2 },
-    { type: InputType.Digit, value: 3 },
     { type: InputType.Operator, operator: OperatorType.Add },
-    { type: InputType.Digit, value: 5 },
+    { type: InputType.Digit, value: 3 },
   ];
   const operations: Array<Operation> = [
-    { operator: OperatorType.Add, value: 23 },
-    { operator: OperatorType.Add, value: 5 },
+    { operator: OperatorType.Add, value: 12 },
+    { operator: OperatorType.Add, value: 3 },
     { operator: OperatorType.Equals, value: 0 },
   ];
   expect(Calculator.getOperationsBuilder(inputs).operations).toEqual(operations);

@@ -7,11 +7,11 @@ export enum InputType {
 }
 
 export enum OperatorType {
-  Add,
-  Subtract,
-  Multiply,
-  Divide,
-  Equals,
+  Add = 'add',
+  Subtract = 'subtract',
+  Multiply = 'multiply',
+  Divide = 'divide',
+  Equals = 'equals',
 }
 
 export type CalcInput =

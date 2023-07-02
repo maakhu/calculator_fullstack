@@ -1,6 +1,4 @@
 import {
-  Digit,
-  Operator,
   InputType,
   OperatorType,
   CalcInput,
@@ -10,7 +8,7 @@ import {
 } from "../lib/types";
 
 const getOperationsBuilder = (inputs: Array<CalcInput>): OperationsBuilder => {
-  const builder = inputs.reduce<OperationsBuilder>(
+  return inputs.reduce<OperationsBuilder>(
     (builder, input) => {
       switch (input.type) {
         case InputType.Digit:
@@ -44,7 +42,6 @@ const getOperationsBuilder = (inputs: Array<CalcInput>): OperationsBuilder => {
       working: { operator: OperatorType.Add, value: 0 },
     }
   );
-  return builder;
 };
 
 const getTotal = (operations: Array<Operation>): number =>
@@ -58,7 +55,7 @@ const getTotal = (operations: Array<Operation>): number =>
         return sum * operation.value;
       case OperatorType.Divide:
         return sum / operation.value;
-      default:
+      case OperatorType.Equals:
         return sum;
     }
   }, 0);
@@ -69,7 +66,7 @@ const getState = (inputs: Array<CalcInput>): CalcState => {
   const lastOperation = operations.length
     ? operations[operations.length - 1]
     : null;
-  if (!lastOperation) return { displayValue: 0 };
+  if (!lastOperation) return { displayValue: builder.working.value };
   switch (lastOperation.operator) {
     case OperatorType.Equals:
       return { displayValue: getTotal(operations) };
